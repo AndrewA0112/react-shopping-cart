@@ -12,14 +12,18 @@ import { CartContext } from './contexts/CartContext'
 
 function App() {
 	const [products] = useState(data);
-	const [cart, setCart] = useState([]);
+	const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
 
 	const addItem = item => {
+		const todoEntries = JSON.parse(localStorage.getItem('cart')) || [];
 		setCart([...cart, item]);
+		todoEntries.push(item)
+		localStorage.setItem('cart', JSON.stringify(todoEntries))
 	};
 
 	const removeItem = id => {
 		setCart(cart.filter(item => item.id !== id))
+		localStorage.setItem('cart', JSON.stringify(cart.filter(item => item.id !== id)))
 	};
 
 	return (
