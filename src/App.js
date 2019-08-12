@@ -15,15 +15,28 @@ function App() {
 	const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
 
 	const addItem = item => {
-		const todoEntries = JSON.parse(localStorage.getItem('cart')) || [];
-		setCart([...cart, item]);
-		todoEntries.push(item)
-		localStorage.setItem('cart', JSON.stringify(todoEntries))
+		if(cart.filter(product => product.title === item.title).length === 0){
+			setCart([...cart, item]);
+			localStorage.setItem('cart', JSON.stringify([...cart, item]))
+		} else {
+			const currentCart = cart.filter(product => product.id !== item.id)
+			const tempObj = cart.filter(product => product.title === item.title)[0]
+			setCart([...currentCart, {...tempObj, quantity: tempObj.quantity + 1}])
+			localStorage.setItem('cart', JSON.stringify([...currentCart, {...tempObj, quantity: tempObj.quantity + 1}]))
+		}
 	};
 
 	const removeItem = id => {
+		const currentItem = cart.filter(item => item.id === id)[0];
+		if(cart.filter(item => item.id === id)[0].quantity > 1){
+			const currentCart = cart.filter(product => product.id !== currentItem.id)
+			const tempObj = cart.filter(product => product.title === currentItem.title)[0]
+			setCart([...currentCart, {...tempObj, quantity: tempObj.quantity - 1}])
+			localStorage.setItem('cart', JSON.stringify([...currentCart, {...tempObj, quantity: tempObj.quantity - 1}]))
+		} else {
 		setCart(cart.filter(item => item.id !== id))
 		localStorage.setItem('cart', JSON.stringify(cart.filter(item => item.id !== id)))
+		}
 	};
 
 	return (
