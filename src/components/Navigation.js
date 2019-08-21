@@ -7,6 +7,7 @@ const Navigation = () => {
 
 	return (
 		<div className="navigation">
+			<NavLink tp ='/'>Andrew Allen Branch</NavLink>
 			<NavLink to="/">Products</NavLink>
 			<NavLink to="/cart">
 				Cart <span>{cart.length}</span>
