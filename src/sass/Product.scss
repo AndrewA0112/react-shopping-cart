@@ -32,17 +32,17 @@
 
 	button {
 		border-radius: 5px;
-		border: 1px solid lightcoral;
+		border: 1px solid #297e0f;
 		padding: 10px;
 		background: transparent;
 		transition: 0.15s ease-in-out;
 		margin: 10px 0;
-		color: lightcoral;
+		color: #297e0f;
 		margin-left: 25px;
 
 		&:hover {
 			cursor: pointer;
-			background: lightcoral;
+			background: #297e0f;
 			color: white;
 		}
 	}
